@@ -103,15 +103,16 @@ class TaskModelViewsetView(ModelViewSet):
 
 
     def list(self,request,*args,**kwargs):
-        qs=Tasks.objects.filter(User=request.user)
+        qs=Tasks.objects.filter(user=request.user)
         serializer=TaskSerializer(qs,many=True)
         return Response(data=serializer.data)
-
+#localhost:8000/api/mtasks/finished_tasks/
     @action(methods=["GET"],detail=False)
     def finished_tasks(self,request,*args,**kwargs):
         qs=Tasks.objects.filter(status=True)
         serializer=TaskSerializer(qs,many=True)
         return Response(data=serializer.data)
+#localhost:8000/api/mtasks/pending_tasks/    
     @action(methods=["GET"],detail=False)
     def pending_tasks(self,request,*args,**kwargs):
         qs=Tasks.objects.filter(status=False)
@@ -120,12 +121,11 @@ class TaskModelViewsetView(ModelViewSet):
 
 
     # native to queryset serialization
-    
+#localhost:8000/api/mtasks/{id}/markas_done/    
     @action(methods=["POST"],detail=True)
     def markas_done(self,request,*args,**kwargs):
         id=kwargs.get("pk")
         Tasks.objects.filter(id=id).update(status=True)
-        
         return Response(data="status updated")
 
 

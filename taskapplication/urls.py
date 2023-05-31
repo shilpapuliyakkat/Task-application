@@ -24,8 +24,8 @@ router.register("users",views.UsersView,basename="users")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("Tasks/",views.TasksView.as_view()),
-    path("Tasks/<int:id>/",views.TaskDetailView.as_view()),
+    path("tasks/",views.TasksView.as_view()),
+    path("tasks/<int:id>/",views.TaskDetailView.as_view()),
     path("",include("taskweb.urls"))    
     
-]+router.urls
+ ]+router.urls
